@@ -50,13 +50,15 @@ jobs:
         issue: ${{ github.head_ref }}
         transition: "Ready For QA Deployment"
     
-  build-docker-image:    
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      uses: docker/build-push-action@v1
-      with:
-        push: false
+   
+  build-docker-image:       
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v3
+        - name: Build the Docker image
+          run: docker build -t getting-started .
+        - name: launching the docker in the browser
+          run: docker run -dp 3000:3000 getting-started 
+                
+               
     
