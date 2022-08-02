@@ -59,6 +59,10 @@ jobs:
           run: docker build -t getting-started .
         - name: launching the docker in the browser
           run: docker run -dp 3000:3000 getting-started 
+        - name: check the image
+          run: docker image ls 
+          
+          
                 
                
     
