@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: team1
+spec:
+  selector:
+    matchLabels:
+      app: team1
+  template:
+    metadata:
+      labels:
+        app: team1
+    spec:
+      containers:
+      - name: team1
+        image: apistoneteam1/getting-started
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: team1-sevice
+spec:
+  selector:
+    app: team1
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    targetPort: 80
+
