@@ -85,8 +85,7 @@ jobs:
             resource-group: APISTONE
         # AKS Cluster Name
             cluster-name: apistoneteam1
-        # AKS kubelogin
-            use-kubelogin: 'true'
+    
          -
           name: Create secret in Kubernetes cluster
           uses: Azure/k8s-create-secret@v1.1
