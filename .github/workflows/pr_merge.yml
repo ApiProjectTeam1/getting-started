@@ -71,8 +71,8 @@ jobs:
     
     # Container build and push to a Azure Container registry (ACR)
     - run: |
-        docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io//getting-started:latest
-        docker push ${{ env.REGISTRY_NAME }}.azurecr.io//getting-started:latest
+        docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/getting-started:latest
+        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/getting-started:latest
     
     # Set the target Azure Kubernetes Service (AKS) cluster. 
     - uses: azure/aks-set-context@v1
