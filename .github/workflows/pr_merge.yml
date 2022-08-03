@@ -73,7 +73,7 @@ jobs:
           with:
             context: .
             file: ./Dockerfile
-            push: true
+            push: 'true'
             tags: ${{ secrets.DOCKER_HUB_USERNAME }}/getting-started:latest
          -   
           name: Azure Kubernetes set context
@@ -85,8 +85,8 @@ jobs:
             resource-group: APISTONE
         # AKS Cluster Name
             cluster-name: apistoneteam1
-        # AKS Cluster Region
-            location: East US
+        # AKS kubelogin
+            use-kubelogin: 'true'
          -
           name: Create secret in Kubernetes cluster
           uses: Azure/k8s-create-secret@v1.1
