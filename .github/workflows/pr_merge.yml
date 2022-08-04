@@ -63,8 +63,19 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-    - name: Checkout source code 
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
+    - run: npm ci
+    - run: npm test    
+
+    - name: check directory
+      run: |
+        pwd
+        echo $GITHUB_WORKSPACE
+   
     - name: ACR build
       id: build-push-acr
       uses: azure/acr-build@v1
