@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: team1
-        image: apistoneteam1/getting-started
+        image: team1project
         resources:
           limits:
             memory: "128Mi"
