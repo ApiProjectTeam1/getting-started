@@ -73,7 +73,7 @@ jobs:
         repository: ${{ secrets.repository }}
         image:  team1project
         folder: app
-        #dockerfile: ../../Dockerfile
+        dockerfile: ../Dockerfile
         branch: dev
         tag: latest
     - name: Azure login
