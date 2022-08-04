@@ -71,7 +71,7 @@ jobs:
         tenant: ${{ secrets.tenant }}
         registry: ${{ secrets.registry }}
         repository: ${{ secrets.repository }}
-        image:  getting-started
+        image:  team1project
         #folder: azure-vote
         branch: dev
         tag: latest
@@ -95,5 +95,5 @@ jobs:
       with:
         namespace: 'dev'
         manifests: k8s/deployment.yml
-        images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/getting-started:latest'
+        images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/team1project:latest'
         pull: false 
