@@ -9,7 +9,8 @@ env:
   REGISTRY_NAME: apistoneteam1
   CLUSTER_NAME: apistoneteam1
   CLUSTER_RESOURCE_GROUP: APISTONE
-
+  
+  
 
 jobs:
   test-transition-issue:
