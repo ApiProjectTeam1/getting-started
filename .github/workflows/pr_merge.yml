@@ -61,7 +61,7 @@ jobs:
     environment: dev
     steps:
     - name: ACR build
-    - uses: azure/docker-login@v1
+      uses: azure/docker-login@v1
       with:
         login-server: apistoneteam1.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
