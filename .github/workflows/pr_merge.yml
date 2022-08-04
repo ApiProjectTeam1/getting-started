@@ -70,12 +70,12 @@ jobs:
         service_principal: ${{ secrets.service_principal }}
         service_principal_password: ${{ secrets.service_principal_password }}
         tenant: ${{ secrets.tenant }}
-        registry: ${{ secrets.registry }}
-        repository: ${{ secrets.repository }}
-        image:  team1project
-        folder: app
+        registry: apistoneteam1
+        repository: team
+        image:  nodeproject
+        # folder: app
         dockerfile: ../../Dockerfile
-        branch: dev
+        # branch: dev
         tag: latest
     - name: Azure login
       id: login
