@@ -72,8 +72,8 @@ jobs:
         registry: ${{ secrets.registry }}
         repository: ${{ secrets.repository }}
         image:  team1project
-        folder: app
-        dockerfile: Dockerfile
+        folder: app/src
+        dockerfile: ../../Dockerfile
         branch: dev
         tag: latest
     - name: Azure login
