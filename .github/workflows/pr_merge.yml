@@ -9,7 +9,7 @@ env:
   REGISTRY_NAME: apistoneteam1
   CLUSTER_NAME: apistoneteam1
   CLUSTER_RESOURCE_GROUP: APISTONE
-  NAMESPACE: dev
+
 
 jobs:
   test-transition-issue:
@@ -74,34 +74,25 @@ jobs:
         docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/getting-started:latest
         docker push ${{ env.REGISTRY_NAME }}.azurecr.io/getting-started:latest
     
-    # Set the target Azure Kubernetes Service (AKS) cluster. 
-    - uses: azure/aks-set-context@v1
+    - name: Azure login
+      id: login
+      uses: azure/login@v1.4.3
       with:
-        creds: '${{ secrets.AZURE_CREDENTIALS }}'
-        cluster-name: ${{ env.CLUSTER_NAME }}
-        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
-    
-#     Create namespace if doesn't exist
-#     - run: |
-#         kubectl create namespace ${{ env.NAMESPACE }} --dry-run -o json | kubectl apply -f -
-    
-    # Create imagepullsecret for Azure Container registry (ACR)
-    - uses: azure/k8s-create-secret@v1
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Set AKS context
+      id: set-context
+      uses: azure/aks-set-context@v3
       with:
-        container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
-        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-        secret-name: ${{ env.REGISTRY_NAME }}-registry-connection
-        namespace: ${{ env.NAMESPACE }}
-    
-    # Deploy app to AKS
-    - uses: azure/k8s-deploy@v1
+        resource-group: '${{ secrets.resource_group }}' 
+        cluster-name: '${{ secrets.cluster_name }}'
+    - name: Setup kubectl
+      id: install-kubectl
+      uses: azure/setup-kubectl@v3
+    - name: Deploy to AKS
+      id: deploy-aks
+      uses: Azure/k8s-deploy@v4
       with:
+        namespace: 'dev'
         manifests: k8s/deployment.yml
-        
-        images: |
-          ${{ env.REGISTRY_NAME }}.azurecr.io/getting-started:latest
-        imagepullsecrets: |
-          ${{ env.REGISTRY_NAME }}-registry-connection
-        namespace: ${{ env.NAMESPACE }} 
-       
+        images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/getting-started:latest'
+        pull: false 
