@@ -1,10 +1,12 @@
 name: pr merge
 
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - dev
+  push:
+    branches: [acrbuild]
+  # pull_request:
+  #   types: [closed]
+  #   branches:
+  #     - dev
 env:
   REGISTRY_NAME: apistoneteam1
   CLUSTER_NAME: apistoneteam1
@@ -75,7 +77,7 @@ jobs:
         image:  nodeproject
         # folder: app
         dockerfile: ../../Dockerfile
-        # branch: dev
+        branch: acrbuild
         tag: latest
     - name: Azure login
       id: login
