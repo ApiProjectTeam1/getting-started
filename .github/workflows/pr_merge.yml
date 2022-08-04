@@ -73,9 +73,9 @@ jobs:
         registry: apistoneteam1
         repository: team
         image:  nodeproject
-        # folder: app
-        dockerfile: ../../Dockerfile
-        # branch: dev
+        folder: app
+        dockerfile: $GITHUB_WORKSPACE/app/Dockerfile
+        branch: dev
         tag: latest
     - name: Azure login
       id: login
