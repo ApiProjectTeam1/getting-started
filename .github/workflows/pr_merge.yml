@@ -60,20 +60,21 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-    - uses: actions/checkout@master
-    
-    # Connect to Azure Container registry (ACR)
-    - uses: azure/docker-login@v1
+    - name: Checkout source code 
+      uses: actions/checkout@v3
+    - name: ACR build
+      id: build-push-acr
+      uses: azure/acr-build@v1
       with:
-        login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
-        username: ${{ secrets.REGISTRY_USERNAME }} 
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-    
-    # Container build and push to a Azure Container registry (ACR)
-    - run: |
-        docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/getting-started:latest
-        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/getting-started:latest
-    
+        service_principal: ${{ secrets.service_principal }}
+        service_principal_password: ${{ secrets.service_principal_password }}
+        tenant: ${{ secrets.tenant }}
+        registry: ${{ secrets.registry }}
+        repository: ${{ secrets.repository }}
+        image:  getting-started
+        #folder: azure-vote
+        branch: dev
+        tag: latest
     - name: Azure login
       id: login
       uses: azure/login@v1.4.3
