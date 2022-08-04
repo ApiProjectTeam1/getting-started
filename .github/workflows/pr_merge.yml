@@ -76,9 +76,13 @@ jobs:
         repository: team
         image:  nodeproject
         # folder: app
-        dockerfile: ../../Dockerfile
+        dockerfile: $GITHUB_WORKSPACE/Dockerfile
         branch: acrbuild
         tag: latest
+    - name: check directory
+      run: |
+        pwd
+        echo $GITHUB_WORKSPACE
     - name: Azure login
       id: login
       uses: azure/login@v1.4.3
