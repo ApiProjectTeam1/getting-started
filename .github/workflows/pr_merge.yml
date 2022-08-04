@@ -60,21 +60,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-    - name: Checkout source code 
-      uses: actions/checkout@v3
     - name: ACR build
-      id: build-push-acr
-      uses: azure/acr-build@v1
+    - uses: azure/docker-login@v1
       with:
-        service_principal: ${{ secrets.service_principal }}
-        service_principal_password: ${{ secrets.service_principal_password }}
-        tenant: ${{ secrets.tenant }}
-        registry: ${{ secrets.registry }}
-        repository: ${{ secrets.repository }}
-        image:  team1project
-        #folder: azure-vote
-        branch: dev
-        tag: latest
+        login-server: apistoneteam1.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build . -t apistoneteam1.azurecr.io/apistoneteam1/team1project:latest
+        docker push apistoneteam1.azurecr.io/apistoneteam1/team1project:latest
     - name: Azure login
       id: login
       uses: azure/login@v1.4.3
