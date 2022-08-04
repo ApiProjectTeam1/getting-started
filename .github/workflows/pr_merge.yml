@@ -86,8 +86,8 @@ jobs:
         registry: apistoneteam1
         repository: team
         image:  nodeproject
-        # folder: app
-        dockerfile: $GITHUB_WORKSPACE/Dockerfile
+        folder: app
+        dockerfile: $GITHUB_WORKSPACE/app/Dockerfile
         branch: acrbuild
         tag: latest
     - name: check directory
