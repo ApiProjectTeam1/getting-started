@@ -51,9 +51,4 @@ process.on('SIGUSR2', gracefulShutdown); // Sent by nodemon
 //commit 17
 //commit 18
 //commit 19
-//commit 20
 //commit 21
-//commit 22
-//commit 23
-//adaada
-//commit 24
