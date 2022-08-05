@@ -9,7 +9,8 @@ env:
   REGISTRY_NAME: apistoneteam1
   CLUSTER_NAME: apistoneteam1
   CLUSTER_RESOURCE_GROUP: APISTONE
-
+  
+  
 
 jobs:
   test-transition-issue:
@@ -69,10 +70,11 @@ jobs:
         service_principal: ${{ secrets.service_principal }}
         service_principal_password: ${{ secrets.service_principal_password }}
         tenant: ${{ secrets.tenant }}
-        registry: ${{ secrets.registry }}
-        repository: ${{ secrets.repository }}
-        image:  getting-started
-        #folder: azure-vote
+        registry: apistoneteam1
+        repository: team
+        image:  nodeproject
+        folder: app
+        dockerfile: $GITHUB_WORKSPACE/app/Dockerfile
         branch: dev
         tag: latest
     - name: Azure login
@@ -95,5 +97,5 @@ jobs:
       with:
         namespace: 'dev'
         manifests: k8s/deployment.yml
-        images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/getting-started:latest'
+        images: '${{ secrets.registry }}.azurecr.io/${{ secrets.repository }}/team1project:latest'
         pull: false 
